@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MPC Digital — UK App Studio</title>
+  <meta name="description" content="A UK software studio building focused apps across health, fitness, finance, and developer tools. Six products, one person, zero busywork.">
+  <link rel="canonical" href="https://mpcdigital.co.uk">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,wght@0,400;1,400&family=Literata:opsz,wght@7..72,600;7..72,700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #FAFAF8;
+      --bg-warm: #F3F1ED;
+      --surface: #FFFFFF;
+      --border: #E8E6E1;
+      --border-strong: #D4D1CB;
+      --text: #1A1A18;
+      --text-secondary: #6B6962;
+      --text-tertiary: #9C9890;
+      --ink: #1A1A18;
+      /* PauseMate palette */
+      --pm-bg: #F5F0EB;
+      --pm-surface: #EDE8E1;
+      --pm-text: #2B2520;
+      --pm-text-secondary: #6B5F55;
+      --pm-accent: #9B5636;
+      --pm-accent-light: #C27B5A;
+      --pm-sage: #4B6F44;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- NAV --- */
+    header {
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .header-right a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 400;
+      transition: color 0.15s;
+    }
+
+    .header-right a:hover { color: var(--text); }
+
+    .header-right .x-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .header-right .x-link svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    /* --- HERO --- */
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 32px 80px;
+    }
+
+    .hero h1 {
+      font-size: clamp(36px, 5.5vw, 64px);
+      font-weight: 600;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+      max-width: 680px;
+      color: var(--ink);
+    }
+
+    .hero h1 em {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-sub {
+      margin-top: 28px;
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      max-width: 480px;
+    }
+
+    /* --- DIVIDER --- */
+    .divider {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    .divider hr {
+      border: none;
+      border-top: 1px solid var(--border);
+    }
+
+    /* --- FEATURED --- */
+    .featured {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 72px 32px 80px;
+    }
+
+    .featured-label {
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-tertiary);
+      margin-bottom: 40px;
+    }
+
+    .featured-content {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 64px;
+      align-items: start;
+    }
+
+    .featured-left h3 {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .featured-left h3 img {
+      width: 44px;
+      height: 44px;
+      border-radius: 11px;
+    }
+
+    .featured-left p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .featured-left p:last-of-type {
+      margin-bottom: 28px;
+    }
+
+    .featured-actions {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .btn-testflight {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: var(--pm-accent);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+
+    .btn-testflight:hover {
+      opacity: 0.88;
+      transform: translateY(-1px);
+    }
+
+    .btn-testflight svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .featured-link {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border-strong);
+      padding-bottom: 1px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .featured-link:hover {
+      color: var(--text);
+      border-color: var(--text);
+    }
+
+    /* --- Phone Mockup (from PauseMate site) --- */
+    .phone-mockup {
+      max-width: 300px;
+      margin: 0 auto;
+      background: var(--pm-surface);
+      border-radius: 40px;
+      padding: 12px;
+      box-shadow: 0 32px 80px rgba(43,37,32,0.06), 0 0 0 1px rgba(43,37,32,0.08);
+    }
+
+    .phone-screen {
+      background: var(--pm-bg);
+      border-radius: 30px;
+      padding: 48px 24px 32px;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .phone-screen::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 28px;
+      background: var(--pm-surface);
+      border-radius: 0 0 16px 16px;
+    }
+
+    .breathing-orb-wrap {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .breathing-orb-glow {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(139,168,136,0.25) 0%, rgba(139,168,136,0.08) 50%, transparent 70%);
+      animation: breathe-glow 4s ease-in-out infinite;
+    }
+
+    .breathing-orb {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #C8785A, #9B5636);
+      animation: breathe 4s ease-in-out infinite;
+      box-shadow: 0 0 30px rgba(155,86,54,0.2), 0 0 60px rgba(75,111,68,0.1);
+      position: relative;
+      z-index: 1;
+    }
+
+    .breathing-orb::before {
+      content: '';
+      position: absolute;
+      inset: 10%;
+      border-radius: 50% 50% 50% 30%;
+      background: rgba(139,168,136,0.1);
+      transform: rotate(-12deg);
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.12); }
+    }
+
+    @keyframes breathe-glow {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.25); opacity: 0.3; }
+    }
+
+    .phone-screen .shield-title {
+      font-family: 'Literata', Georgia, serif;
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 5px;
+      letter-spacing: -0.3px;
+      color: var(--pm-text);
+    }
+
+    .phone-screen .shield-subtitle {
+      font-size: 13px;
+      color: var(--pm-text-secondary);
+      margin-bottom: 20px;
+    }
+
+    .phone-btn-primary {
+      width: 100%;
+      padding: 12px;
+      background: var(--pm-accent);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      margin-bottom: 8px;
+      cursor: default;
+    }
+
+    .phone-btn-secondary {
+      width: 100%;
+      padding: 10px;
+      background: transparent;
+      color: var(--pm-text-secondary);
+      border: none;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: 'Inter', sans-serif;
+      cursor: default;
+    }
+
+    /* --- PRODUCTS --- */
+    .products {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 72px 32px 80px;
+    }
+
+    .products-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 48px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .products-header h2 {
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-tertiary);
+    }
+
+    .products-header span {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .product-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .product {
+      display: grid;
+      grid-template-columns: 200px 1fr auto;
+      align-items: baseline;
+      gap: 32px;
+      padding: 28px 32px;
+      background: var(--surface);
+      transition: background 0.15s;
+    }
+
+    .product:hover {
+      background: var(--bg);
+    }
+
+    .product-name {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    .product-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .product-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      white-space: nowrap;
+    }
+
+    .product-platform {
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-tertiary);
+      padding: 3px 8px;
+      border: 1px solid var(--border-strong);
+      border-radius: 4px;
+    }
+
+    .product-stage {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    /* --- ABOUT --- */
+    .about {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 72px 32px 96px;
+    }
+
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-left h2 {
+      font-size: clamp(28px, 3.5vw, 40px);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+
+    .about-left h2 em {
+      font-family: 'Newsreader', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .about-right {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      padding-top: 8px;
+    }
+
+    .about-right p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    .about-right p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .about-right p a {
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--border-strong);
+      transition: text-decoration-color 0.15s;
+    }
+
+    .about-right p a:hover {
+      text-decoration-color: var(--text);
+    }
+
+    /* --- FOOTER --- */
+    footer {
+      border-top: 1px solid var(--border);
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    footer small {
+      font-size: 13px;
+      color: var(--text-tertiary);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-tertiary);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-links .gh-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .footer-links .gh-link svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    /* --- RESPONSIVE --- */
+    @media (max-width: 800px) {
+      header { padding: 16px 20px; }
+      .hero { padding: 64px 20px 56px; }
+      .featured { padding: 48px 20px 56px; }
+      .products { padding: 48px 20px 56px; }
+      .about { padding: 48px 20px 64px; }
+      .divider { padding: 0 20px; }
+      footer { padding: 24px 20px; }
+
+      .featured-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .featured-content .phone-mockup {
+        max-width: 260px;
+        order: -1;
+      }
+
+      .product {
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 20px;
+      }
+
+      .product-meta { margin-top: 4px; }
+
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .header-right .hide-mobile { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* --- REDUCED MOTION --- */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="/" class="logo">MPC Digital</a>
+    <div class="header-right">
+      <a href="#products" class="hide-mobile">Products</a>
+      <a href="#about" class="hide-mobile">About</a>
+      <a href="https://x.com/mpcdigital" target="_blank" rel="noopener" class="x-link">
+        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>We build software<br>for problems nobody<br><em>bothered to fix</em></h1>
+    <p class="hero-sub">MPC Digital is a UK software studio. Six products across health, fitness, finance, and dev tools &mdash; each one targeting a gap the market left open.</p>
+  </section>
+
+  <div class="divider"><hr></div>
+
+  <!-- FEATURED: PauseMate -->
+  <section class="featured" id="featured">
+    <p class="featured-label">Launching first</p>
+
+    <div class="featured-content">
+      <div class="featured-left">
+        <h3>
+          <img src="pausemate-icon.png" alt="PauseMate app icon">
+          PauseMate
+        </h3>
+        <p>Most screen time apps block you from your phone and hope willpower does the rest. It doesn't. PauseMate takes a different approach: a short pause before you open the app you're about to waste time in.</p>
+        <p>Breathe, reflect on why you're reaching for it, or set a short delay. No hard locks, no guilt. Just enough friction to break the autopilot.</p>
+
+        <div class="featured-actions">
+          <a href="https://testflight.apple.com/join/Qn377E3S" class="btn-testflight">
+            <svg viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+            Join TestFlight beta
+          </a>
+          <a href="https://pausemate.app" class="featured-link">pausemate.app</a>
+        </div>
+      </div>
+
+      <div class="phone-mockup">
+        <div class="phone-screen">
+          <div class="breathing-orb-wrap">
+            <div class="breathing-orb-glow"></div>
+            <div class="breathing-orb"></div>
+          </div>
+          <div class="shield-title">Pause and reflect</div>
+          <div class="shield-subtitle">Take a moment &mdash; or choose to continue.</div>
+          <button class="phone-btn-primary" aria-hidden="true">Begin pause</button>
+          <button class="phone-btn-secondary" aria-hidden="true">Skip this time</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"><hr></div>
+
+  <!-- REST OF PORTFOLIO -->
+  <section class="products" id="products">
+    <div class="products-header">
+      <h2>Everything else we're working on</h2>
+      <span>5 more apps</span>
+    </div>
+
+    <div class="product-list">
+
+      <div class="product">
+        <span class="product-name">LIO</span>
+        <span class="product-desc">Readiness scoring from Apple Watch and Oura Ring. Should you push, maintain, or protect today?</span>
+        <div class="product-meta">
+          <span class="product-platform">iOS</span>
+          <span class="product-stage">Building</span>
+        </div>
+      </div>
+
+      <div class="product">
+        <span class="product-name">BoxingAI</span>
+        <span class="product-desc">Upload shadowboxing clips, get scored feedback on guard, stance, rotation, and form. Personalised drill plans.</span>
+        <div class="product-meta">
+          <span class="product-platform">iOS</span>
+          <span class="product-stage">Building</span>
+        </div>
+      </div>
+
+      <div class="product">
+        <span class="product-name">Causel</span>
+        <span class="product-desc">Continuous alignment signal for engineering teams. Shows which features actually move your OKRs &mdash; catches strategic waste before it ships.</span>
+        <div class="product-meta">
+          <span class="product-platform">Web</span>
+          <span class="product-stage">Building</span>
+        </div>
+      </div>
+
+      <div class="product">
+        <span class="product-name">UK Net Worth Tracker</span>
+        <span class="product-desc">Bank accounts, ISAs, pensions, and property in one dashboard. Built for UK finances, not retrofitted from a US app.</span>
+        <div class="product-meta">
+          <span class="product-platform">iOS</span>
+          <span class="product-stage">Validating</span>
+        </div>
+      </div>
+
+      <div class="product">
+        <span class="product-name">Landlord Ltd</span>
+        <span class="product-desc">Tax records and CT600 prep for buy-to-let limited companies. 400K+ SPV landlords, zero purpose-built tools. Until now.</span>
+        <div class="product-meta">
+          <span class="product-platform">iOS</span>
+          <span class="product-stage">Validating</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"><hr></div>
+
+  <!-- ABOUT -->
+  <section class="about" id="about">
+    <div class="about-content">
+      <div class="about-left">
+        <h2>Small studio,<br><em>sharp focus</em></h2>
+      </div>
+      <div class="about-right">
+        <p><strong>Every product starts with evidence, not enthusiasm.</strong> We validate demand before writing a line of code. If people don't need it, we don't build it.</p>
+        <p><strong>One problem per app.</strong> No feature creep, no platform plays. Each product does one job and does it properly &mdash; native, accessible, considered.</p>
+        <p><strong>Based in the UK.</strong> Our finance apps are built for UK tax, UK pensions, UK property. Not adapted from something American.</p>
+        <p><strong>Built with an agentic pipeline.</strong> The entire portfolio runs through <a href="https://github.com/mpc-eng/apos-pipeline" target="_blank" rel="noopener">APOS</a>, an open-source framework built on Claude that handles everything from idea validation to build execution. One person, six products, zero busywork.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <small>&copy; 2026 MPC Digital Ltd</small>
+    <div class="footer-links">
+      <a href="https://x.com/mpcdigital" target="_blank" rel="noopener">X</a>
+      <a href="https://github.com/mpc-eng/apos-pipeline" target="_blank" rel="noopener" class="gh-link">
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.607.069-.607 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+        GitHub
+      </a>
+      <a href="mailto:michael@mpcdigital.co.uk">michael@mpcdigital.co.uk</a>
+    </div>
+  </footer>
+
+</body>
+</html>
