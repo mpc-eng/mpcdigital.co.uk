@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MPC Digital — UK App Studio</title>
-  <meta name="description" content="A UK software studio building focused apps across health, fitness, and developer tools. Four products, one person, zero busywork.">
+  <meta name="description" content="A UK software studio building focused apps across health, finance, and productivity. One operator, a portfolio of products, zero busywork.">
   <link rel="canonical" href="https://mpcdigital.co.uk">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -357,6 +357,94 @@
       cursor: default;
     }
 
+    /* --- SHIPPING NEXT --- */
+    .shipping {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 72px 32px 80px;
+    }
+
+    .shipping-label {
+      font-size: 14px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-tertiary);
+      margin-bottom: 40px;
+    }
+
+    .shipping-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .ship-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 32px;
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .ship-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .ship-card h3 {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+
+    .ship-badge {
+      font-size: 12px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--pm-sage);
+      padding: 3px 9px;
+      border: 1px solid rgba(75,111,68,0.3);
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+
+    .ship-card p {
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      flex: 1;
+    }
+
+    .ship-card-foot {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .ship-card-foot .product-platform { flex-shrink: 0; }
+
+    .ship-card-foot a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border-strong);
+      padding-bottom: 1px;
+      transition: color 0.15s, border-color 0.15s;
+    }
+
+    .ship-card-foot a:hover {
+      color: var(--text);
+      border-color: var(--text);
+    }
+
     /* --- PRODUCTS --- */
     .products {
       max-width: 1200px;
@@ -563,6 +651,15 @@
         gap: 40px;
       }
 
+      .shipping { padding: 48px 20px 56px; }
+
+      .shipping-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .ship-card { padding: 24px; }
+
       .featured-content .phone-mockup {
         max-width: 260px;
         order: -1;
@@ -613,14 +710,14 @@
 
   <section class="hero">
     <h1>We build software<br>for problems nobody<br><em>bothered to fix</em></h1>
-    <p class="hero-sub">MPC Digital is a UK software studio. Four products across health, fitness, and dev tools &mdash; each one targeting a gap the market left open.</p>
+    <p class="hero-sub">MPC Digital is a UK software studio building focused apps across health, finance, and productivity &mdash; each one targeting a gap the market left open.</p>
   </section>
 
   <div class="divider"><hr></div>
 
   <!-- FEATURED: PauseMate -->
   <section class="featured" id="featured">
-    <p class="featured-label">Launching first</p>
+    <p class="featured-label">On the App Store</p>
 
     <div class="featured-content">
       <div class="featured-left">
@@ -632,9 +729,9 @@
         <p>Breathe, reflect on why you're reaching for it, or set a short delay. No hard locks, no guilt. Just enough friction to break the autopilot.</p>
 
         <div class="featured-actions">
-          <a href="https://testflight.apple.com/join/Qn377E3S" class="btn-testflight">
+          <a href="https://apps.apple.com/app/id6758200034" class="btn-testflight">
             <svg viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
-            Join TestFlight beta
+            Download on the App Store
           </a>
           <a href="https://pausemate.app" class="featured-link">pausemate.app</a>
         </div>
@@ -657,11 +754,46 @@
 
   <div class="divider"><hr></div>
 
-  <!-- REST OF PORTFOLIO -->
+  <!-- SHIPPING NEXT -->
+  <section class="shipping">
+    <p class="shipping-label">Shipping next</p>
+
+    <div class="shipping-grid">
+
+      <div class="ship-card">
+        <div class="ship-card-top">
+          <h3>Respite</h3>
+          <span class="ship-badge">Coming soon</span>
+        </div>
+        <p>A calm, private migraine diary. Log attacks in seconds, surface the triggers that actually correlate, and see what helps &mdash; no account, no cloud, nothing leaves your phone.</p>
+        <div class="ship-card-foot">
+          <span class="product-platform">iOS</span>
+          <a href="https://respite.mpcdigital.co.uk" target="_blank" rel="noopener">respite.mpcdigital.co.uk</a>
+        </div>
+      </div>
+
+      <div class="ship-card">
+        <div class="ship-card-top">
+          <h3>Bearing</h3>
+          <span class="ship-badge">Coming soon</span>
+        </div>
+        <p>Find the UK savings account actually worth switching to. Live, impartial rates across easy-access, fixed, and ISAs &mdash; updated daily and built for UK tax, not adapted from somewhere else.</p>
+        <div class="ship-card-foot">
+          <span class="product-platform">iOS</span>
+          <a href="https://bearing.mpcdigital.co.uk" target="_blank" rel="noopener">bearing.mpcdigital.co.uk</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"><hr></div>
+
+  <!-- IN DEVELOPMENT -->
   <section class="products" id="products">
     <div class="products-header">
-      <h2>Everything else we're working on</h2>
-      <span>3 more apps</span>
+      <h2>In development</h2>
+      <span>4 more apps</span>
     </div>
 
     <div class="product-list">
@@ -676,8 +808,17 @@
       </div>
 
       <div class="product">
-        <span class="product-name">BoxingAI</span>
-        <span class="product-desc">Upload shadowboxing clips, get scored feedback on guard, stance, rotation, and form. Personalised drill plans.</span>
+        <span class="product-name">Foris</span>
+        <span class="product-desc">Plan the day out and keep the memory of it &mdash; a trail and activity companion for getting the family outdoors.</span>
+        <div class="product-meta">
+          <span class="product-platform">iOS</span>
+          <span class="product-stage">TestFlight beta</span>
+        </div>
+      </div>
+
+      <div class="product">
+        <span class="product-name">MAST</span>
+        <span class="product-desc">A focus companion that protects your deep-work time &mdash; fewer interruptions, more finished work.</span>
         <div class="product-meta">
           <span class="product-platform">iOS</span>
           <span class="product-stage">Building</span>
@@ -693,7 +834,6 @@
         </div>
       </div>
 
-
     </div>
   </section>
 
@@ -708,8 +848,8 @@
       <div class="about-right">
         <p><strong>Every product starts with evidence, not enthusiasm.</strong> We validate demand before writing a line of code. If people don't need it, we don't build it.</p>
         <p><strong>One problem per app.</strong> No feature creep, no platform plays. Each product does one job and does it properly &mdash; native, accessible, considered.</p>
-        <p><strong>Based in the UK.</strong> Our finance apps are built for UK tax, UK pensions, UK property. Not adapted from something American.</p>
-        <p><strong>Built with an agentic pipeline.</strong> The entire portfolio runs through <a href="https://github.com/mpc-eng/apos-pipeline" target="_blank" rel="noopener">APOS</a>, an open-source framework built on Claude that handles everything from idea validation to build execution. One person, six products, zero busywork.</p>
+        <p><strong>Based in the UK.</strong> Our finance apps are built for UK tax, UK savings rules, and UK ISAs &mdash; not adapted from something American.</p>
+        <p><strong>Built with an agentic pipeline.</strong> The entire portfolio runs through <a href="https://github.com/mpc-eng/apos-pipeline" target="_blank" rel="noopener">APOS</a>, an open-source framework built on Claude that handles everything from idea validation to build execution. One operator, a whole portfolio, zero busywork.</p>
       </div>
     </div>
   </section>
