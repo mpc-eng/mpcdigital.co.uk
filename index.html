@@ -1,870 +1,947 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MPC Digital — UK App Studio</title>
-  <meta name="description" content="A UK software studio building focused apps across health, finance, and productivity. One operator, a portfolio of products, zero busywork.">
-  <link rel="canonical" href="https://mpcdigital.co.uk">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Newsreader:ital,wght@0,400;1,400&family=Literata:opsz,wght@7..72,600;7..72,700&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #FAFAF8;
-      --bg-warm: #F3F1ED;
-      --surface: #FFFFFF;
-      --border: #E8E6E1;
-      --border-strong: #D4D1CB;
-      --text: #1A1A18;
-      --text-secondary: #6B6962;
-      --text-tertiary: #9C9890;
-      --ink: #1A1A18;
-      /* PauseMate palette */
-      --pm-bg: #F5F0EB;
-      --pm-surface: #EDE8E1;
-      --pm-text: #2B2520;
-      --pm-text-secondary: #6B5F55;
-      --pm-accent: #9B5636;
-      --pm-accent-light: #C27B5A;
-      --pm-sage: #4B6F44;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* --- NAV --- */
-    header {
-      padding: 20px 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .logo {
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-      color: var(--text);
-      text-decoration: none;
-      text-transform: uppercase;
-    }
-
-    .header-right {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-    }
-
-    .header-right a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 400;
-      transition: color 0.15s;
-    }
-
-    .header-right a:hover { color: var(--text); }
-
-    .header-right .x-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .header-right .x-link svg {
-      width: 14px;
-      height: 14px;
-      fill: currentColor;
-    }
-
-    /* --- HERO --- */
-    .hero {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 100px 32px 80px;
-    }
-
-    .hero h1 {
-      font-size: clamp(36px, 5.5vw, 64px);
-      font-weight: 600;
-      letter-spacing: -0.035em;
-      line-height: 1.08;
-      max-width: 680px;
-      color: var(--ink);
-    }
-
-    .hero h1 em {
-      font-family: 'Newsreader', Georgia, serif;
-      font-style: italic;
-      font-weight: 400;
-      letter-spacing: -0.02em;
-    }
-
-    .hero-sub {
-      margin-top: 28px;
-      font-size: 17px;
-      line-height: 1.65;
-      color: var(--text-secondary);
-      max-width: 480px;
-    }
-
-    /* --- DIVIDER --- */
-    .divider {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 32px;
-    }
-
-    .divider hr {
-      border: none;
-      border-top: 1px solid var(--border);
-    }
-
-    /* --- FEATURED --- */
-    .featured {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 72px 32px 80px;
-    }
-
-    .featured-label {
-      font-size: 14px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--text-tertiary);
-      margin-bottom: 40px;
-    }
-
-    .featured-content {
-      display: grid;
-      grid-template-columns: 1fr 340px;
-      gap: 64px;
-      align-items: start;
-    }
-
-    .featured-left h3 {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-size: clamp(24px, 3vw, 34px);
-      font-weight: 600;
-      letter-spacing: -0.025em;
-      line-height: 1.15;
-      color: var(--ink);
-      margin-bottom: 20px;
-    }
-
-    .featured-left h3 img {
-      width: 44px;
-      height: 44px;
-      border-radius: 11px;
-    }
-
-    .featured-left p {
-      font-size: 16px;
-      line-height: 1.7;
-      color: var(--text-secondary);
-      margin-bottom: 16px;
-    }
-
-    .featured-left p:last-of-type {
-      margin-bottom: 28px;
-    }
-
-    .featured-actions {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-
-    .btn-testflight {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 24px;
-      background: var(--pm-accent);
-      color: #fff;
-      font-size: 15px;
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: 10px;
-      transition: opacity 0.15s, transform 0.15s;
-    }
-
-    .btn-testflight:hover {
-      opacity: 0.88;
-      transform: translateY(-1px);
-    }
-
-    .btn-testflight svg {
-      width: 16px;
-      height: 16px;
-      fill: currentColor;
-    }
-
-    .featured-link {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-secondary);
-      text-decoration: none;
-      border-bottom: 1px solid var(--border-strong);
-      padding-bottom: 1px;
-      transition: color 0.15s, border-color 0.15s;
-    }
-
-    .featured-link:hover {
-      color: var(--text);
-      border-color: var(--text);
-    }
-
-    /* --- Phone Mockup (from PauseMate site) --- */
-    .phone-mockup {
-      max-width: 300px;
-      margin: 0 auto;
-      background: var(--pm-surface);
-      border-radius: 40px;
-      padding: 12px;
-      box-shadow: 0 32px 80px rgba(43,37,32,0.06), 0 0 0 1px rgba(43,37,32,0.08);
-    }
-
-    .phone-screen {
-      background: var(--pm-bg);
-      border-radius: 30px;
-      padding: 48px 24px 32px;
-      min-height: 420px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .phone-screen::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px;
-      height: 28px;
-      background: var(--pm-surface);
-      border-radius: 0 0 16px 16px;
-    }
-
-    .breathing-orb-wrap {
-      position: relative;
-      width: 120px;
-      height: 120px;
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .breathing-orb-glow {
-      position: absolute;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(139,168,136,0.25) 0%, rgba(139,168,136,0.08) 50%, transparent 70%);
-      animation: breathe-glow 4s ease-in-out infinite;
-    }
-
-    .breathing-orb {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, #C8785A, #9B5636);
-      animation: breathe 4s ease-in-out infinite;
-      box-shadow: 0 0 30px rgba(155,86,54,0.2), 0 0 60px rgba(75,111,68,0.1);
-      position: relative;
-      z-index: 1;
-    }
-
-    .breathing-orb::before {
-      content: '';
-      position: absolute;
-      inset: 10%;
-      border-radius: 50% 50% 50% 30%;
-      background: rgba(139,168,136,0.1);
-      transform: rotate(-12deg);
-    }
-
-    @keyframes breathe {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.12); }
-    }
-
-    @keyframes breathe-glow {
-      0%, 100% { transform: scale(1); opacity: 0.8; }
-      50% { transform: scale(1.25); opacity: 0.3; }
-    }
-
-    .phone-screen .shield-title {
-      font-family: 'Literata', Georgia, serif;
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 5px;
-      letter-spacing: -0.3px;
-      color: var(--pm-text);
-    }
-
-    .phone-screen .shield-subtitle {
-      font-size: 13px;
-      color: var(--pm-text-secondary);
-      margin-bottom: 20px;
-    }
-
-    .phone-btn-primary {
-      width: 100%;
-      padding: 12px;
-      background: var(--pm-accent);
-      color: #fff;
-      border: none;
-      border-radius: 12px;
-      font-size: 15px;
-      font-weight: 700;
-      font-family: 'Inter', sans-serif;
-      margin-bottom: 8px;
-      cursor: default;
-    }
-
-    .phone-btn-secondary {
-      width: 100%;
-      padding: 10px;
-      background: transparent;
-      color: var(--pm-text-secondary);
-      border: none;
-      font-size: 13px;
-      font-weight: 500;
-      font-family: 'Inter', sans-serif;
-      cursor: default;
-    }
-
-    /* --- SHIPPING NEXT --- */
-    .shipping {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 72px 32px 80px;
-    }
-
-    .shipping-label {
-      font-size: 14px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--text-tertiary);
-      margin-bottom: 40px;
-    }
-
-    .shipping-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-
-    .ship-card {
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 32px;
-      background: var(--surface);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .ship-card-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
-
-    .ship-card h3 {
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-    }
-
-    .ship-badge {
-      font-size: 12px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--pm-sage);
-      padding: 3px 9px;
-      border: 1px solid rgba(75,111,68,0.3);
-      border-radius: 20px;
-      white-space: nowrap;
-    }
-
-    .ship-card p {
-      font-size: 15px;
-      line-height: 1.65;
-      color: var(--text-secondary);
-      margin-bottom: 24px;
-      flex: 1;
-    }
-
-    .ship-card-foot {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .ship-card-foot .product-platform { flex-shrink: 0; }
-
-    .ship-card-foot a {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-secondary);
-      text-decoration: none;
-      border-bottom: 1px solid var(--border-strong);
-      padding-bottom: 1px;
-      transition: color 0.15s, border-color 0.15s;
-    }
-
-    .ship-card-foot a:hover {
-      color: var(--text);
-      border-color: var(--text);
-    }
-
-    /* --- PRODUCTS --- */
-    .products {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 72px 32px 80px;
-    }
-
-    .products-header {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      margin-bottom: 48px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .products-header h2 {
-      font-size: 14px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--text-tertiary);
-    }
-
-    .products-header span {
-      font-size: 13px;
-      color: var(--text-tertiary);
-    }
-
-    .product-list {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-      background: var(--border);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .product {
-      display: grid;
-      grid-template-columns: 200px 1fr auto;
-      align-items: baseline;
-      gap: 32px;
-      padding: 28px 32px;
-      background: var(--surface);
-      transition: background 0.15s;
-    }
-
-    .product:hover {
-      background: var(--bg);
-    }
-
-    .product-name {
-      font-size: 17px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      color: var(--ink);
-    }
-
-    .product-desc {
-      font-size: 15px;
-      color: var(--text-secondary);
-      line-height: 1.55;
-    }
-
-    .product-meta {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      white-space: nowrap;
-    }
-
-    .product-platform {
-      font-size: 12px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--text-tertiary);
-      padding: 3px 8px;
-      border: 1px solid var(--border-strong);
-      border-radius: 4px;
-    }
-
-    .product-stage {
-      font-size: 13px;
-      color: var(--text-tertiary);
-    }
-
-    /* --- ABOUT --- */
-    .about {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 72px 32px 96px;
-    }
-
-    .about-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: start;
-    }
-
-    .about-left h2 {
-      font-size: clamp(28px, 3.5vw, 40px);
-      font-weight: 600;
-      letter-spacing: -0.03em;
-      line-height: 1.15;
-      color: var(--ink);
-    }
-
-    .about-left h2 em {
-      font-family: 'Newsreader', Georgia, serif;
-      font-style: italic;
-      font-weight: 400;
-    }
-
-    .about-right {
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-      padding-top: 8px;
-    }
-
-    .about-right p {
-      font-size: 16px;
-      line-height: 1.7;
-      color: var(--text-secondary);
-    }
-
-    .about-right p strong {
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    .about-right p a {
-      color: var(--text);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      text-decoration-color: var(--border-strong);
-      transition: text-decoration-color 0.15s;
-    }
-
-    .about-right p a:hover {
-      text-decoration-color: var(--text);
-    }
-
-    /* --- FOOTER --- */
-    footer {
-      border-top: 1px solid var(--border);
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 32px 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    footer small {
-      font-size: 13px;
-      color: var(--text-tertiary);
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 20px;
-    }
-
-    .footer-links a {
-      font-size: 13px;
-      color: var(--text-tertiary);
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-
-    .footer-links a:hover { color: var(--text); }
-
-    .footer-links .gh-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .footer-links .gh-link svg {
-      width: 14px;
-      height: 14px;
-      fill: currentColor;
-    }
-
-    /* --- RESPONSIVE --- */
-    @media (max-width: 800px) {
-      header { padding: 16px 20px; }
-      .hero { padding: 64px 20px 56px; }
-      .featured { padding: 48px 20px 56px; }
-      .products { padding: 48px 20px 56px; }
-      .about { padding: 48px 20px 64px; }
-      .divider { padding: 0 20px; }
-      footer { padding: 24px 20px; }
-
-      .featured-content {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .shipping { padding: 48px 20px 56px; }
-
-      .shipping-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-
-      .ship-card { padding: 24px; }
-
-      .featured-content .phone-mockup {
-        max-width: 260px;
-        order: -1;
-      }
-
-      .product {
-        grid-template-columns: 1fr;
-        gap: 8px;
-        padding: 20px;
-      }
-
-      .product-meta { margin-top: 4px; }
-
-      .about-content {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-
-      .header-right .hide-mobile { display: none; }
-    }
-
-    @media (max-width: 480px) {
-      footer { flex-direction: column; align-items: flex-start; }
-    }
-
-    /* --- REDUCED MOTION --- */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-      html { scroll-behavior: auto; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MPC Digital — UK Software Studio</title>
+<meta name="description" content="MPC Digital is a one-person UK software studio shipping focused apps across health, finance, and productivity — each built end-to-end by one operator and an autonomous pipeline.">
+<link rel="canonical" href="https://mpcdigital.co.uk">
+<meta name="theme-color" content="#F3F4F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#141513" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mpcdigital.co.uk">
+<meta property="og:title" content="MPC Digital — UK Software Studio">
+<meta property="og:description" content="One operator, a whole portfolio. Focused apps across health, finance, and productivity — built with an agentic pipeline.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@mpcdigital">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' fill='%2317191B'/%3E%3Cpath d='M12 5 L19 12 L12 19 L5 12 Z' fill='none' stroke='%23F3F4F2' stroke-width='1.4'/%3E%3Cpath d='M12 9 L15 12 L12 15 L9 12 Z' fill='%23F3F4F2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400;1,9..144,500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     MPC DIGITAL — "Instrument" direction
+     Shell is a colorless instrument; the products carry the color.
+     ============================================================ */
+
+  :root {
+    /* light (default) — cool paper, cool ink. NOT cream. */
+    --ground:      #F3F4F2;
+    --ground-2:    #ECEEEB;
+    --ink:         #17191B;
+    --ink-soft:    #33383A;
+    --muted:       #6B6F6D;
+    --faint:       #9CA09D;
+    --hairline:    #E0E2DE;
+    --hairline-2:  #D4D7D2;
+    --surface:     #FBFBFA;
+
+    /* the inverted "machine" band is a committed dark look in BOTH themes */
+    --band:        #121312;
+    --band-ink:    #EDEEEA;
+    --band-muted:  #8C918C;
+    --band-hair:   #2A2C2A;
+
+    /* per-product hues — the only chromatic color on the page */
+    --pausemate:   #B5623C;
+    --respite:     #7E5A88;
+    --bearing:     #2E6E6A;
+    --lio:         #C0452F;
+    --foris:       #3F6B3A;
+    --mast:        #3C4C88;
+    --causel:      #B0801F;
+
+    --maxw: 1180px;
+    --pad: clamp(20px, 5vw, 56px);
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+    --f-display: "Fraunces", "Hoefler Text", "Iowan Old Style", Georgia, serif;
+    --f-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --f-mono: "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground:     #141513;
+      --ground-2:   #1B1C1A;
+      --ink:        #ECEEE9;
+      --ink-soft:   #C3C6C0;
+      --muted:      #8E938C;
+      --faint:      #686C66;
+      --hairline:   #2A2C29;
+      --hairline-2: #34362F;
+      --surface:    #1C1E1B;
+
+      --band:       #0C0D0C;
+      --band-ink:   #ECEEE9;
+      --band-muted: #868B84;
+      --band-hair:  #26282A;
+
+      --pausemate:  #D27B4F;
+      --respite:    #A985B3;
+      --bearing:    #4FA39D;
+      --lio:        #E26B55;
+      --foris:      #6AA05F;
+      --mast:       #7585C9;
+      --causel:     #D8A63A;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground:     #141513;
+    --ground-2:   #1B1C1A;
+    --ink:        #ECEEE9;
+    --ink-soft:   #C3C6C0;
+    --muted:      #8E938C;
+    --faint:      #686C66;
+    --hairline:   #2A2C29;
+    --hairline-2: #34362F;
+    --surface:    #1C1E1B;
+    --band:       #0C0D0C;
+    --band-ink:   #ECEEE9;
+    --band-muted: #868B84;
+    --band-hair:  #26282A;
+    --pausemate:  #D27B4F;
+    --respite:    #A985B3;
+    --bearing:    #4FA39D;
+    --lio:        #E26B55;
+    --foris:      #6AA05F;
+    --mast:       #7585C9;
+    --causel:     #D8A63A;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--f-body);
+    background: var(--ground);
+    color: var(--ink);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-optical-sizing: auto;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--ink); color: var(--ground); }
+
+  a { color: inherit; text-decoration: none; }
+
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding-left: var(--pad); padding-right: var(--pad); }
+
+  .mono {
+    font-family: var(--f-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+  }
+
+  /* ---------- top bar ---------- */
+  header.bar {
+    position: sticky; top: 0; z-index: 60;
+    background: color-mix(in srgb, var(--ground) 86%, transparent);
+    backdrop-filter: blur(12px) saturate(1.1);
+    -webkit-backdrop-filter: blur(12px) saturate(1.1);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.3s var(--ease);
+  }
+  header.bar.scrolled { border-bottom-color: var(--hairline); }
+  .bar-inner {
+    max-width: var(--maxw); margin: 0 auto; padding: 14px var(--pad);
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+  }
+  .mark {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--f-mono); font-size: 13px; font-weight: 600;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink);
+  }
+  .mark .glyph {
+    width: 16px; height: 16px; flex: none; color: var(--ink);
+    transition: transform 0.6s var(--ease);
+  }
+  .mark:hover .glyph { transform: rotate(90deg); }
+  .bar-right { display: flex; align-items: center; gap: 4px; }
+  .bar-link {
+    font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--muted);
+    padding: 8px 12px; border-radius: 8px; transition: color 0.2s, background 0.2s;
+  }
+  .bar-link:hover { color: var(--ink); background: var(--ground-2); }
+  .theme-toggle {
+    width: 34px; height: 34px; border-radius: 9px; border: 1px solid var(--hairline);
+    background: transparent; color: var(--muted); cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center;
+    transition: color 0.2s, border-color 0.2s, transform 0.2s;
+  }
+  .theme-toggle:hover { color: var(--ink); border-color: var(--hairline-2); transform: translateY(-1px); }
+  .theme-toggle svg { width: 16px; height: 16px; }
+
+  /* ---------- hero ---------- */
+  .hero { padding: clamp(56px, 11vw, 120px) 0 clamp(40px, 7vw, 80px); position: relative; }
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 12px; margin-bottom: clamp(28px, 5vw, 48px);
+  }
+  .hero-eyebrow .dot {
+    width: 7px; height: 7px; border-radius: 50%; background: #3F6B3A; flex: none;
+    box-shadow: 0 0 0 0 rgba(63,107,58,0.5); animation: live-pulse 2.6s infinite;
+  }
+  @keyframes live-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(63,107,58,0.45); }
+    70% { box-shadow: 0 0 0 7px rgba(63,107,58,0); }
+    100% { box-shadow: 0 0 0 0 rgba(63,107,58,0); }
+  }
+  h1.hero-title {
+    font-family: var(--f-display);
+    font-weight: 400;
+    font-size: clamp(38px, 7vw, 86px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    max-width: 16ch;
+    text-wrap: balance;
+  }
+  h1.hero-title .reveal-line { display: block; overflow: hidden; }
+  h1.hero-title .reveal-line > span {
+    display: block;
+    transform: translateY(104%);
+    transition: transform 0.9s var(--ease);
+  }
+  .ready h1.hero-title .reveal-line > span { transform: translateY(0); }
+  h1.hero-title .reveal-line:nth-child(2) > span { transition-delay: 0.08s; }
+  h1.hero-title .reveal-line:nth-child(3) > span { transition-delay: 0.16s; }
+
+  /* cycling phrase */
+  .cycler {
+    display: inline-block; position: relative;
+    font-style: italic;
+    vertical-align: bottom;
+  }
+  .cycler .slot { position: relative; display: inline-grid; }
+  .cycler .word {
+    grid-area: 1 / 1;
+    white-space: nowrap;
+    opacity: 0; transform: translateY(0.4em);
+    transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+    color: var(--ink);
+  }
+  .cycler .word.in { opacity: 1; transform: translateY(0); }
+  .cycler .word.out { opacity: 0; transform: translateY(-0.4em); }
+  .cycler::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0.08em; height: 2px;
+    background: currentColor; opacity: 0.18;
+  }
+
+  .hero-sub {
+    margin-top: clamp(24px, 4vw, 36px);
+    font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.6; color: var(--ink-soft); max-width: 46ch;
+    opacity: 0; transform: translateY(14px);
+    transition: opacity 0.8s var(--ease) 0.4s, transform 0.8s var(--ease) 0.4s;
+  }
+  .ready .hero-sub { opacity: 1; transform: none; }
+
+  .hero-actions {
+    margin-top: clamp(28px, 4vw, 40px); display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+    opacity: 0; transform: translateY(14px);
+    transition: opacity 0.8s var(--ease) 0.55s, transform 0.8s var(--ease) 0.55s;
+  }
+  .ready .hero-actions { opacity: 1; transform: none; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 14px 20px; border-radius: 11px; cursor: pointer; border: 1px solid transparent;
+    transition: transform 0.25s var(--ease), background 0.25s, color 0.25s, border-color 0.25s;
+    will-change: transform;
+  }
+  .btn-primary { background: var(--ink); color: var(--ground); }
+  .btn-primary:hover { background: var(--ink-soft); }
+  .btn-ghost { border-color: var(--hairline-2); color: var(--ink); }
+  .btn-ghost:hover { background: var(--ground-2); }
+  .btn svg { width: 14px; height: 14px; }
+
+  /* ---------- ticker ---------- */
+  .ticker {
+    border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline);
+    overflow: hidden; white-space: nowrap; padding: 14px 0; background: var(--ground);
+  }
+  .ticker-track { display: inline-flex; gap: 0; animation: ticker 34s linear infinite; }
+  .ticker:hover .ticker-track { animation-play-state: paused; }
+  .ticker-track span {
+    font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted); padding: 0 26px; display: inline-flex; align-items: center; gap: 26px;
+  }
+  .ticker-track span::after { content: "✴"; color: var(--faint); font-size: 10px; }
+  @keyframes ticker { to { transform: translateX(-50%); } }
+
+  /* ---------- index (portfolio) ---------- */
+  .index { padding: clamp(56px, 9vw, 110px) 0 clamp(30px, 6vw, 70px); position: relative; }
+  .index-head {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+    margin-bottom: clamp(26px, 4vw, 40px); flex-wrap: wrap;
+  }
+  .index-head h2 {
+    font-family: var(--f-display); font-weight: 400; font-style: italic;
+    font-size: clamp(22px, 3vw, 30px); letter-spacing: -0.01em; color: var(--ink);
+  }
+
+  .rows { border-top: 1px solid var(--hairline); position: relative; }
+  .row {
+    position: relative; display: grid;
+    grid-template-columns: minmax(0,1fr) auto;
+    align-items: center; gap: 20px;
+    padding: clamp(18px, 2.4vw, 30px) 0;
+    border-bottom: 1px solid var(--hairline);
+    cursor: pointer;
+    --hue: var(--ink);
+  }
+  .row::before {
+    content: ""; position: absolute; left: calc(var(--pad) * -1); right: calc(var(--pad) * -1);
+    top: 0; bottom: 0; background: var(--hue); opacity: 0; z-index: -1;
+    transition: opacity 0.4s var(--ease);
+  }
+  .row-main { display: flex; align-items: baseline; gap: clamp(12px, 2vw, 22px); min-width: 0; }
+  .row-name {
+    font-family: var(--f-display); font-weight: 400;
+    font-size: clamp(28px, 5.2vw, 58px); line-height: 1; letter-spacing: -0.02em;
+    color: var(--ink); transition: color 0.35s var(--ease), transform 0.45s var(--ease);
+    white-space: nowrap;
+  }
+  .row-blurb {
+    font-size: 14px; color: var(--muted); line-height: 1.45;
+    max-width: 34ch;
+    transition: color 0.35s var(--ease), opacity 0.35s var(--ease);
+    display: none;
+  }
+  .row-meta { display: flex; align-items: center; gap: 14px; flex: none; }
+  .row-tag {
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted); padding: 5px 9px; border: 1px solid var(--hairline-2); border-radius: 20px;
+    white-space: nowrap; transition: color 0.3s, border-color 0.3s;
+  }
+  .row-stage {
+    font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--faint); white-space: nowrap; display: flex; align-items: center; gap: 6px;
+  }
+  .row-stage .s-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+  .row-stage.live { color: var(--foris); }
+  .row-arrow {
+    width: 15px; height: 15px; color: var(--faint); flex: none;
+    opacity: 0; transform: translateX(-6px);
+    transition: opacity 0.35s var(--ease), transform 0.35s var(--ease), color 0.35s;
+  }
+
+  /* hover state (desktop) */
+  @media (hover: hover) and (min-width: 820px) {
+    .rows.has-active .row { opacity: 0.4; transition: opacity 0.35s var(--ease); }
+    .rows.has-active .row.active { opacity: 1; }
+    .row.active { --dummy: 0; }
+    .row.active::before { opacity: 0.05; }
+    .row.active .row-name { color: var(--hue); transform: translateX(10px); }
+    .row.active .row-tag { color: var(--hue); border-color: color-mix(in srgb, var(--hue) 40%, transparent); }
+    .row.active .row-arrow { opacity: 1; transform: translateX(0); color: var(--hue); }
+  }
+
+  /* floating preview (desktop) */
+  .preview {
+    position: fixed; width: 260px; height: 300px; z-index: 40;
+    pointer-events: none; opacity: 0; transform: scale(0.96);
+    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+    border-radius: 18px; overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--hairline);
+    box-shadow: 0 30px 70px rgba(0,0,0,0.16), 0 2px 8px rgba(0,0,0,0.06);
+    display: none;
+  }
+  .preview.show { opacity: 1; transform: scale(1); }
+  .preview-stage {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    opacity: 0; transition: opacity 0.3s var(--ease); padding: 22px;
+  }
+  .preview-stage.on { opacity: 1; }
+  .preview-vis { flex: 1; display: flex; align-items: center; justify-content: center; }
+  .preview-cap { font-family: var(--f-mono); font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .preview-cap strong { color: var(--ink); font-weight: 600; display: block; font-size: 11px; margin-bottom: 3px; }
+
+  /* mobile inline preview */
+  .row-mini { display: none; }
+
+  @media (max-width: 819px) {
+    .row { grid-template-columns: 54px 1fr; gap: 16px; align-items: center; }
+    .row-mini {
+      display: flex; width: 54px; height: 54px; border-radius: 13px;
+      background: var(--ground-2); align-items: center; justify-content: center; overflow: hidden; flex: none;
+      border: 1px solid var(--hairline);
+    }
+    .row-main { flex-direction: column; align-items: flex-start; gap: 7px; }
+    .row-name { font-size: clamp(26px, 8vw, 38px); white-space: normal; }
+    .row-blurb { display: block; font-size: 13px; }
+    .row-meta { grid-column: 2; margin-top: 10px; }
+    .index .row { grid-template-areas: "mini main" "mini meta"; }
+    .row-mini { grid-area: mini; align-self: start; margin-top: 6px; }
+    .row-main { grid-area: main; }
+    .row-meta { grid-area: meta; }
+  }
+
+  /* ---------- the machine band (committed dark in both themes) ---------- */
+  .machine {
+    background: var(--band); color: var(--band-ink); position: relative; overflow: hidden;
+    margin-top: clamp(40px, 6vw, 70px);
+  }
+  .machine .glow {
+    position: absolute; width: 680px; height: 680px; border-radius: 50%; top: -220px; right: -160px;
+    background: radial-gradient(circle, rgba(181,98,60,0.16), rgba(60,76,136,0.08) 42%, transparent 66%);
+    filter: blur(8px); animation: drift 18s ease-in-out infinite alternate;
+  }
+  @keyframes drift { to { transform: translate(-80px, 90px) scale(1.12); } }
+  .machine-inner { position: relative; z-index: 1; padding: clamp(60px, 10vw, 120px) 0; }
+  .machine .mono { color: var(--band-muted); }
+  .machine h2 {
+    font-family: var(--f-display); font-weight: 400; font-size: clamp(32px, 5.5vw, 62px);
+    line-height: 1.04; letter-spacing: -0.02em; margin: 22px 0 0; max-width: 18ch; text-wrap: balance;
+  }
+  .machine h2 em { font-style: italic; color: var(--band-muted); }
+  .machine-grid {
+    margin-top: clamp(36px, 5vw, 56px); display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(28px, 5vw, 64px);
+    align-items: start;
+  }
+  .machine-copy p { color: var(--band-ink); font-size: clamp(15px, 1.5vw, 18px); line-height: 1.65; margin-bottom: 16px; opacity: 0.86; }
+  .machine-copy a.inline { border-bottom: 1px solid var(--band-hair); padding-bottom: 1px; transition: border-color 0.25s; }
+  .machine-copy a.inline:hover { border-bottom-color: var(--band-ink); }
+
+  .ledger { border-top: 1px solid var(--band-hair); }
+  .ledger-row {
+    display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+    padding: 16px 0; border-bottom: 1px solid var(--band-hair);
+  }
+  .ledger-row dt { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--band-muted); }
+  .ledger-row dd { font-family: var(--f-display); font-size: clamp(26px, 3.4vw, 38px); line-height: 1; font-variant-numeric: tabular-nums; }
+  .ledger-row dd small { font-family: var(--f-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--band-muted); margin-left: 8px; }
+
+  @media (max-width: 760px) { .machine-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- principles ---------- */
+  .principles { padding: clamp(56px, 9vw, 110px) 0; }
+  .principles-head { margin-bottom: clamp(30px, 5vw, 50px); }
+  .principles-head h2 {
+    font-family: var(--f-display); font-weight: 400; font-size: clamp(26px, 4vw, 42px);
+    line-height: 1.08; letter-spacing: -0.02em; max-width: 20ch; text-wrap: balance;
+  }
+  .principles-head h2 em { font-style: italic; }
+  .p-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--hairline); border: 1px solid var(--hairline); border-radius: 16px; overflow: hidden; }
+  .p-cell { background: var(--ground); padding: clamp(24px, 3.5vw, 38px); }
+  .p-cell .mono { margin-bottom: 14px; }
+  .p-cell h3 { font-family: var(--f-display); font-weight: 400; font-size: clamp(19px, 2vw, 24px); margin-bottom: 10px; letter-spacing: -0.01em; }
+  .p-cell p { color: var(--muted); font-size: 15px; line-height: 1.6; }
+  @media (max-width: 680px) { .p-grid { grid-template-columns: 1fr; } }
+
+  /* ---------- footer ---------- */
+  footer { border-top: 1px solid var(--hairline); padding: clamp(40px, 6vw, 70px) 0 36px; }
+  .foot-top { display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap; align-items: flex-end; }
+  .foot-cta { font-family: var(--f-display); font-weight: 400; font-size: clamp(28px, 5vw, 52px); line-height: 1.05; letter-spacing: -0.02em; max-width: 14ch; }
+  .foot-cta em { font-style: italic; }
+  .foot-contact { display: flex; flex-direction: column; gap: 10px; }
+  .foot-contact a { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.06em; color: var(--ink-soft); display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s; }
+  .foot-contact a:hover { color: var(--ink); }
+  .foot-contact a svg { width: 13px; height: 13px; }
+  .foot-bottom { margin-top: clamp(40px, 6vw, 64px); display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .foot-bottom .mono { font-size: 10px; }
+
+  /* reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.8s var(--ease), transform 0.8s var(--ease); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+    html { scroll-behavior: auto; }
+    .reveal { opacity: 1; transform: none; }
+    h1.hero-title .reveal-line > span { transform: none; }
+    .hero-sub, .hero-actions { opacity: 1; transform: none; }
+  }
+
+  /* preview mini-vis building blocks */
+  .vis { width: 150px; height: 150px; position: relative; display: flex; align-items: center; justify-content: center; }
+  .mini-vis { width: 40px; height: 40px; position: relative; display:flex; align-items:center; justify-content:center; }
+
+  /* breathing orb (PauseMate) */
+  .orb { width: 86px; height: 86px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--pausemate) 70%, #fff), var(--pausemate)); animation: breathe 4s ease-in-out infinite; box-shadow: 0 0 40px color-mix(in srgb, var(--pausemate) 40%, transparent); }
+  .mini-vis .orb { width: 26px; height: 26px; }
+  @keyframes breathe { 0%,100% { transform: scale(0.82); opacity: 0.85; } 50% { transform: scale(1.08); opacity: 1; } }
+
+  /* compass (Bearing) */
+  .compass { width: 118px; height: 118px; border-radius: 50%; border: 1px solid color-mix(in srgb, var(--bearing) 40%, transparent); position: relative; }
+  .compass::after { content:""; position:absolute; inset: 44%; border-radius: 50%; background: var(--bearing); }
+  .needle { position: absolute; left: 50%; top: 10%; width: 2px; height: 40%; background: linear-gradient(var(--bearing), transparent); transform-origin: bottom center; transform: translateX(-50%) rotate(0deg); animation: swing 4s var(--ease) infinite; }
+  .mini-vis .compass { width: 32px; height: 32px; } .mini-vis .needle { height: 42%; }
+  @keyframes swing { 0% { transform: translateX(-50%) rotate(-54deg);} 55% { transform: translateX(-50%) rotate(28deg);} 75%{ transform: translateX(-50%) rotate(14deg);} 100%{ transform: translateX(-50%) rotate(20deg);} }
+
+  /* readiness ring (LIO) */
+  .ring { width: 110px; height: 110px; transform: rotate(-90deg); }
+  .ring circle { fill: none; stroke-width: 11; stroke-linecap: round; }
+  .ring .track { stroke: color-mix(in srgb, var(--lio) 18%, transparent); }
+  .ring .fill { stroke: var(--lio); stroke-dasharray: 295; stroke-dashoffset: 295; animation: ringfill 3.4s var(--ease) infinite; }
+  @keyframes ringfill { 0%{ stroke-dashoffset: 295;} 60%{ stroke-dashoffset: 74;} 100%{ stroke-dashoffset: 74;} }
+
+  /* calm pulse (Respite) */
+  .pulse svg { width: 130px; height: 60px; }
+  .pulse path { fill: none; stroke: var(--respite); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 340; stroke-dashoffset: 340; animation: trace 3.6s linear infinite; }
+  @keyframes trace { to { stroke-dashoffset: -340; } }
+
+  /* trail (Foris) */
+  .trail svg { width: 130px; height: 110px; }
+  .trail .route { fill: none; stroke: var(--foris); stroke-width: 2.5; stroke-dasharray: 6 7; stroke-linecap: round; stroke-dashoffset: 0; animation: dash 2.4s linear infinite; }
+  .trail .pin { fill: var(--foris); }
+  @keyframes dash { to { stroke-dashoffset: -26; } }
+
+  /* focus mast (MAST) */
+  .focus { display:flex; align-items:flex-end; gap: 7px; height: 100px; }
+  .focus i { width: 12px; background: color-mix(in srgb, var(--mast) 30%, transparent); border-radius: 4px; display:block; animation: grow 2.8s var(--ease) infinite; }
+  .focus i:nth-child(1){ animation-delay: 0s; } .focus i:nth-child(2){ animation-delay:.2s;} .focus i:nth-child(3){ animation-delay:.4s;} .focus i:nth-child(4){ animation-delay:.6s;} .focus i:nth-child(5){ animation-delay:.8s;}
+  @keyframes grow { 0%,100%{ height: 18%; background: color-mix(in srgb, var(--mast) 25%, transparent);} 50%{ height: 96%; background: var(--mast);} }
+  .mini-vis .focus { height: 30px; gap: 3px; } .mini-vis .focus i { width: 4px; }
+
+  /* alignment signal (Causel) */
+  .align svg { width: 134px; height: 96px; }
+  .align .l1, .align .l2 { fill:none; stroke-width: 2.5; stroke-linecap: round; }
+  .align .l1 { stroke: var(--causel); stroke-dasharray: 200; stroke-dashoffset: 200; animation: draw 3s var(--ease) infinite; }
+  .align .l2 { stroke: color-mix(in srgb, var(--causel) 45%, transparent); stroke-dasharray: 200; stroke-dashoffset: 200; animation: draw 3s var(--ease) infinite 0.3s; }
+  @keyframes draw { 0%{ stroke-dashoffset: 200;} 70%,100%{ stroke-dashoffset: 0;} }
+
+  .mini-vis .ring { width: 30px; height: 30px; } .mini-vis .pulse svg { width: 40px; height: 22px; }
+  .mini-vis .trail svg { width: 36px; height: 30px; } .mini-vis .align svg { width: 40px; height: 28px; }
+</style>
 </head>
 <body>
 
-  <header>
-    <a href="/" class="logo">MPC Digital</a>
-    <div class="header-right">
-      <a href="#products" class="hide-mobile">Products</a>
-      <a href="#about" class="hide-mobile">About</a>
-      <a href="https://x.com/mpcdigital" target="_blank" rel="noopener" class="x-link">
-        <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      </a>
-    </div>
-  </header>
+<header class="bar" id="bar">
+  <div class="bar-inner">
+    <a href="#top" class="mark" aria-label="MPC Digital home">
+      <svg class="glyph" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M12 2 L22 12 L12 22 L2 12 Z" stroke="currentColor" stroke-width="1.6"/>
+        <path d="M12 7 L17 12 L12 17 L7 12 Z" fill="currentColor"/>
+      </svg>
+      MPC Digital
+    </a>
+    <nav class="bar-right">
+      <a href="#work" class="bar-link">Work</a>
+      <a href="#studio" class="bar-link">Studio</a>
+      <a href="#contact" class="bar-link">Contact</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+      </button>
+    </nav>
+  </div>
+</header>
 
+<main id="top">
+
+  <!-- HERO -->
   <section class="hero">
-    <h1>We build software<br>for problems nobody<br><em>bothered to fix</em></h1>
-    <p class="hero-sub">MPC Digital is a UK software studio building focused apps across health, finance, and productivity &mdash; each one targeting a gap the market left open.</p>
+    <div class="wrap">
+      <div class="hero-eyebrow">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="mono">A one-person UK software studio · Est. 2026</span>
+      </div>
+      <h1 class="hero-title">
+        <span class="reveal-line"><span>We build software</span></span>
+        <span class="reveal-line"><span>for problems nobody</span></span>
+        <span class="reveal-line"><span class="cycler"><span class="slot" id="cycler" aria-live="polite"></span></span></span>
+      </h1>
+      <p class="hero-sub">A studio shipping focused apps across health, finance, and productivity — each one aimed squarely at a gap the market left open, each built end-to-end by one operator and an autonomous pipeline.</p>
+      <div class="hero-actions">
+        <a href="#work" class="btn btn-primary magnetic">See the work
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+        </a>
+        <a href="https://apps.apple.com/app/id6758200034" target="_blank" rel="noopener" class="btn btn-ghost">PauseMate on the App Store
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+      </div>
+    </div>
   </section>
 
-  <div class="divider"><hr></div>
+  <!-- TICKER -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track" id="tickerTrack">
+      <span>UK Software Studio</span><span>Shipping real apps</span><span>Health · Finance · Productivity</span><span>Built with an agentic pipeline</span><span>Evidence before enthusiasm</span>
+      <span>UK Software Studio</span><span>Shipping real apps</span><span>Health · Finance · Productivity</span><span>Built with an agentic pipeline</span><span>Evidence before enthusiasm</span>
+    </div>
+  </div>
 
-  <!-- FEATURED: PauseMate -->
-  <section class="featured" id="featured">
-    <p class="featured-label">On the App Store</p>
-
-    <div class="featured-content">
-      <div class="featured-left">
-        <h3>
-          <img src="pausemate-icon.png" alt="PauseMate app icon">
-          PauseMate
-        </h3>
-        <p>Most screen time apps block you from your phone and hope willpower does the rest. It doesn't. PauseMate takes a different approach: a short pause before you open the app you're about to waste time in.</p>
-        <p>Breathe, reflect on why you're reaching for it, or set a short delay. No hard locks, no guilt. Just enough friction to break the autopilot.</p>
-
-        <div class="featured-actions">
-          <a href="https://apps.apple.com/app/id6758200034" class="btn-testflight">
-            <svg viewBox="0 0 24 24"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
-            Download on the App Store
-          </a>
-          <a href="https://pausemate.app" class="featured-link">pausemate.app</a>
-        </div>
+  <!-- WORK / INDEX -->
+  <section class="index" id="work">
+    <div class="wrap">
+      <div class="index-head reveal">
+        <h2>The work</h2>
+        <span class="mono">Seven products · 2026</span>
       </div>
 
-      <div class="phone-mockup">
-        <div class="phone-screen">
-          <div class="breathing-orb-wrap">
-            <div class="breathing-orb-glow"></div>
-            <div class="breathing-orb"></div>
+      <div class="rows" id="rows">
+
+        <a class="row reveal" style="--hue: var(--pausemate)" data-vis="orb" data-cap="On the App Store" href="https://apps.apple.com/app/id6758200034" target="_blank" rel="noopener">
+          <span class="row-mini"><span class="mini-vis"><span class="orb"></span></span></span>
+          <span class="row-main">
+            <span class="row-name">PauseMate</span>
+            <span class="row-blurb">A short pause before you open the app you're about to lose an hour in. Friction, not willpower.</span>
+          </span>
+          <span class="row-meta">
+            <span class="row-tag">iOS · Screen time</span>
+            <span class="row-stage live"><span class="s-dot"></span>Live</span>
+            <svg class="row-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+
+        <a class="row reveal" style="--hue: var(--respite)" data-vis="pulse" data-cap="Shipping soon" href="https://respite.mpcdigital.co.uk" target="_blank" rel="noopener">
+          <span class="row-mini"><span class="mini-vis"><span class="pulse"><svg viewBox="0 0 130 60"><path d="M2 30 H40 L48 12 L58 48 L66 30 H128"/></svg></span></span></span>
+          <span class="row-main">
+            <span class="row-name">Respite</span>
+            <span class="row-blurb">A calm, private migraine diary. Log attacks in seconds, surface what actually correlates — nothing leaves your phone.</span>
+          </span>
+          <span class="row-meta">
+            <span class="row-tag">iOS · Health</span>
+            <span class="row-stage"><span class="s-dot"></span>Shipping soon</span>
+            <svg class="row-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+
+        <a class="row reveal" style="--hue: var(--bearing)" data-vis="compass" data-cap="Shipping soon" href="https://bearing.mpcdigital.co.uk" target="_blank" rel="noopener">
+          <span class="row-mini"><span class="mini-vis"><span class="compass"><span class="needle"></span></span></span></span>
+          <span class="row-main">
+            <span class="row-name">Bearing</span>
+            <span class="row-blurb">Find the UK savings account actually worth switching to. Live, impartial rates — built for UK tax, not adapted from abroad.</span>
+          </span>
+          <span class="row-meta">
+            <span class="row-tag">iOS · Finance</span>
+            <span class="row-stage"><span class="s-dot"></span>Shipping soon</span>
+            <svg class="row-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+
+        <a class="row reveal" style="--hue: var(--foris)" data-vis="trail" data-cap="TestFlight beta" href="#contact">
+          <span class="row-mini"><span class="mini-vis"><span class="trail"><svg viewBox="0 0 130 110"><path class="route" d="M14 96 C50 90 40 50 74 46 C104 42 96 20 118 16"/><circle class="pin" cx="118" cy="16" r="5"/></svg></span></span></span>
+          <span class="row-main">
+            <span class="row-name">Foris</span>
+            <span class="row-blurb">Plan the day out and keep the memory of it — a trail and activity companion for getting the family outdoors.</span>
+          </span>
+          <span class="row-meta">
+            <span class="row-tag">iOS · Outdoors</span>
+            <span class="row-stage"><span class="s-dot"></span>TestFlight</span>
+            <svg class="row-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+
+        <a class="row reveal" style="--hue: var(--lio)" data-vis="ring" data-cap="In development" href="#contact">
+          <span class="row-mini"><span class="mini-vis"><svg class="ring" viewBox="0 0 110 110"><circle class="track" cx="55" cy="55" r="47"/><circle class="fill" cx="55" cy="55" r="47"/></svg></span></span>
+          <span class="row-main">
+            <span class="row-name">LIO</span>
+            <span class="row-blurb">Readiness scoring from Apple Watch and Oura. Should you push, maintain, or protect today?</span>
+          </span>
+          <span class="row-meta">
+            <span class="row-tag">iOS · Fitness</span>
+            <span class="row-stage"><span class="s-dot"></span>Building</span>
+            <svg class="row-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+
+        <a class="row reveal" style="--hue: var(--mast)" data-vis="focus" data-cap="In development" href="#contact">
+          <span class="row-mini"><span class="mini-vis"><span class="focus"><i></i><i></i><i></i><i></i><i></i></span></span></span>
+          <span class="row-main">
+            <span class="row-name">MAST</span>
+            <span class="row-blurb">A focus companion that protects your deep-work time — fewer interruptions, more finished work.</span>
+          </span>
+          <span class="row-meta">
+            <span class="row-tag">iOS · Productivity</span>
+            <span class="row-stage"><span class="s-dot"></span>Building</span>
+            <svg class="row-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+
+        <a class="row reveal" style="--hue: var(--causel)" data-vis="align" data-cap="In development" href="#contact">
+          <span class="row-mini"><span class="mini-vis"><span class="align"><svg viewBox="0 0 134 96"><path class="l1" d="M6 86 C40 84 54 30 128 16"/><path class="l2" d="M6 60 C44 58 70 52 128 46"/></svg></span></span></span>
+          <span class="row-main">
+            <span class="row-name">Causel</span>
+            <span class="row-blurb">A continuous alignment signal for engineering teams — which features actually move the OKRs, before waste ships.</span>
+          </span>
+          <span class="row-meta">
+            <span class="row-tag">Web · Dev tools</span>
+            <span class="row-stage"><span class="s-dot"></span>Building</span>
+            <svg class="row-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- THE MACHINE (dark band) -->
+  <section class="machine" id="studio">
+    <div class="glow" aria-hidden="true"></div>
+    <div class="machine-inner">
+      <div class="wrap">
+        <span class="mono reveal">The studio is a system</span>
+        <h2 class="reveal">One operator.<br>A whole portfolio.<br><em>Zero busywork.</em></h2>
+        <div class="machine-grid">
+          <div class="machine-copy reveal">
+            <p>Every product runs through <a class="inline" href="https://github.com/mpc-eng/apos-pipeline" target="_blank" rel="noopener">APOS</a> — an open-source pipeline built on Claude that carries an idea from demand-validation through design, build, and review to the App Store submission gate.</p>
+            <p>The rule the whole studio turns on: <strong>evidence before enthusiasm.</strong> Demand is validated before a line of code is written. One problem per app. Native, accessible, considered — and British where it counts: UK tax, UK savings rules, UK ISAs, not adapted from somewhere else.</p>
           </div>
-          <div class="shield-title">Pause and reflect</div>
-          <div class="shield-subtitle">Take a moment &mdash; or choose to continue.</div>
-          <button class="phone-btn-primary" aria-hidden="true">Begin pause</button>
-          <button class="phone-btn-secondary" aria-hidden="true">Skip this time</button>
+          <dl class="ledger reveal">
+            <div class="ledger-row"><dt>Products in flight</dt><dd data-count="7">0</dd></div>
+            <div class="ledger-row"><dt>Live on the App Store</dt><dd data-count="1">0</dd></div>
+            <div class="ledger-row"><dt>Shipping this quarter</dt><dd data-count="2">0</dd></div>
+            <div class="ledger-row"><dt>People on the team</dt><dd data-count="1">0 <small>+ one pipeline</small></dd></div>
+          </dl>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="divider"><hr></div>
-
-  <!-- SHIPPING NEXT -->
-  <section class="shipping">
-    <p class="shipping-label">Shipping next</p>
-
-    <div class="shipping-grid">
-
-      <div class="ship-card">
-        <div class="ship-card-top">
-          <h3>Respite</h3>
-          <span class="ship-badge">Coming soon</span>
-        </div>
-        <p>A calm, private migraine diary. Log attacks in seconds, surface the triggers that actually correlate, and see what helps &mdash; no account, no cloud, nothing leaves your phone.</p>
-        <div class="ship-card-foot">
-          <span class="product-platform">iOS</span>
-          <a href="https://respite.mpcdigital.co.uk" target="_blank" rel="noopener">respite.mpcdigital.co.uk</a>
-        </div>
+  <!-- PRINCIPLES -->
+  <section class="principles">
+    <div class="wrap">
+      <div class="principles-head reveal">
+        <h2>Small studio, <em>sharp focus.</em> Four rules do most of the work.</h2>
       </div>
-
-      <div class="ship-card">
-        <div class="ship-card-top">
-          <h3>Bearing</h3>
-          <span class="ship-badge">Coming soon</span>
+      <div class="p-grid">
+        <div class="p-cell reveal">
+          <div class="mono">01 · Evidence</div>
+          <h3>Validate before building</h3>
+          <p>Demand is tested before code exists. If people don't need it, it doesn't get built — however good the idea felt.</p>
         </div>
-        <p>Find the UK savings account actually worth switching to. Live, impartial rates across easy-access, fixed, and ISAs &mdash; updated daily and built for UK tax, not adapted from somewhere else.</p>
-        <div class="ship-card-foot">
-          <span class="product-platform">iOS</span>
-          <a href="https://bearing.mpcdigital.co.uk" target="_blank" rel="noopener">bearing.mpcdigital.co.uk</a>
+        <div class="p-cell reveal">
+          <div class="mono">02 · Focus</div>
+          <h3>One problem per app</h3>
+          <p>No feature creep, no platform plays. Each product does one job and does it properly.</p>
         </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="divider"><hr></div>
-
-  <!-- IN DEVELOPMENT -->
-  <section class="products" id="products">
-    <div class="products-header">
-      <h2>In development</h2>
-      <span>4 more apps</span>
-    </div>
-
-    <div class="product-list">
-
-      <div class="product">
-        <span class="product-name">LIO</span>
-        <span class="product-desc">Readiness scoring from Apple Watch and Oura Ring. Should you push, maintain, or protect today?</span>
-        <div class="product-meta">
-          <span class="product-platform">iOS</span>
-          <span class="product-stage">Building</span>
+        <div class="p-cell reveal">
+          <div class="mono">03 · Place</div>
+          <h3>Built for the UK</h3>
+          <p>The finance apps are built for UK tax, UK savings rules, and UK ISAs — not localised from an American product.</p>
         </div>
-      </div>
-
-      <div class="product">
-        <span class="product-name">Foris</span>
-        <span class="product-desc">Plan the day out and keep the memory of it &mdash; a trail and activity companion for getting the family outdoors.</span>
-        <div class="product-meta">
-          <span class="product-platform">iOS</span>
-          <span class="product-stage">TestFlight beta</span>
+        <div class="p-cell reveal">
+          <div class="mono">04 · Leverage</div>
+          <h3>An operator and a pipeline</h3>
+          <p>One person at the helm, an autonomous system doing the lifting. The output of a team, the taste of a studio.</p>
         </div>
-      </div>
-
-      <div class="product">
-        <span class="product-name">MAST</span>
-        <span class="product-desc">A focus companion that protects your deep-work time &mdash; fewer interruptions, more finished work.</span>
-        <div class="product-meta">
-          <span class="product-platform">iOS</span>
-          <span class="product-stage">Building</span>
-        </div>
-      </div>
-
-      <div class="product">
-        <span class="product-name">Causel</span>
-        <span class="product-desc">Continuous alignment signal for engineering teams. Shows which features actually move your OKRs &mdash; catches strategic waste before it ships.</span>
-        <div class="product-meta">
-          <span class="product-platform">Web</span>
-          <span class="product-stage">Building</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="divider"><hr></div>
-
-  <!-- ABOUT -->
-  <section class="about" id="about">
-    <div class="about-content">
-      <div class="about-left">
-        <h2>Small studio,<br><em>sharp focus</em></h2>
-      </div>
-      <div class="about-right">
-        <p><strong>Every product starts with evidence, not enthusiasm.</strong> We validate demand before writing a line of code. If people don't need it, we don't build it.</p>
-        <p><strong>One problem per app.</strong> No feature creep, no platform plays. Each product does one job and does it properly &mdash; native, accessible, considered.</p>
-        <p><strong>Based in the UK.</strong> Our finance apps are built for UK tax, UK savings rules, and UK ISAs &mdash; not adapted from something American.</p>
-        <p><strong>Built with an agentic pipeline.</strong> The entire portfolio runs through <a href="https://github.com/mpc-eng/apos-pipeline" target="_blank" rel="noopener">APOS</a>, an open-source framework built on Claude that handles everything from idea validation to build execution. One operator, a whole portfolio, zero busywork.</p>
       </div>
     </div>
   </section>
 
-  <footer>
-    <small>&copy; 2026 MPC Digital Ltd</small>
-    <div class="footer-links">
-      <a href="https://x.com/mpcdigital" target="_blank" rel="noopener">X</a>
-      <a href="https://github.com/mpc-eng/apos-pipeline" target="_blank" rel="noopener" class="gh-link">
-        <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.607.069-.607 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
-        GitHub
-      </a>
-      <a href="mailto:michael@mpcdigital.co.uk">michael@mpcdigital.co.uk</a>
+  <!-- FOOTER / CONTACT -->
+  <footer id="contact">
+    <div class="wrap">
+      <div class="foot-top">
+        <div class="foot-cta reveal">Have a problem<br>worth <em>fixing?</em></div>
+        <div class="foot-contact reveal">
+          <a href="mailto:michael@mpcdigital.co.uk">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            michael@mpcdigital.co.uk
+          </a>
+          <a href="https://x.com/mpcdigital" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            @mpcdigital
+          </a>
+          <a href="https://github.com/mpc-eng/apos-pipeline" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.167 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.604-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.62.069-.607.069-.607 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+            APOS on GitHub
+          </a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <span class="mono">© 2026 MPC Digital Ltd</span>
+        <span class="mono">Made in the UK · One operator + one pipeline</span>
+      </div>
     </div>
   </footer>
+
+</main>
+
+<!-- floating preview panel (desktop) -->
+<div class="preview" id="preview" aria-hidden="true">
+  <div class="preview-stage" data-for="orb"><div class="preview-vis"><span class="vis"><span class="orb"></span></span></div><div class="preview-cap"><strong>PauseMate</strong>Breathe before the scroll</div></div>
+  <div class="preview-stage" data-for="pulse"><div class="preview-vis"><span class="vis"><span class="pulse"><svg viewBox="0 0 130 60"><path d="M2 30 H40 L48 12 L58 48 L66 30 H128"/></svg></span></span></div><div class="preview-cap"><strong>Respite</strong>Private by design</div></div>
+  <div class="preview-stage" data-for="compass"><div class="preview-vis"><span class="vis"><span class="compass"><span class="needle"></span></span></span></div><div class="preview-cap"><strong>Bearing</strong>Point your savings the right way</div></div>
+  <div class="preview-stage" data-for="trail"><div class="preview-vis"><span class="vis"><span class="trail"><svg viewBox="0 0 130 110"><path class="route" d="M14 96 C50 90 40 50 74 46 C104 42 96 20 118 16"/><circle class="pin" cx="118" cy="16" r="5"/></svg></span></span></div><div class="preview-cap"><strong>Foris</strong>Out, and remembered</div></div>
+  <div class="preview-stage" data-for="ring"><div class="preview-vis"><span class="vis"><svg class="ring" viewBox="0 0 110 110"><circle class="track" cx="55" cy="55" r="47"/><circle class="fill" cx="55" cy="55" r="47"/></svg></span></div><div class="preview-cap"><strong>LIO</strong>Push, maintain, or protect</div></div>
+  <div class="preview-stage" data-for="focus"><div class="preview-vis"><span class="vis"><span class="focus"><i></i><i></i><i></i><i></i><i></i></span></span></div><div class="preview-cap"><strong>MAST</strong>Protect the deep work</div></div>
+  <div class="preview-stage" data-for="align"><div class="preview-vis"><span class="vis"><span class="align"><svg viewBox="0 0 134 96"><path class="l1" d="M6 86 C40 84 54 30 128 16"/><path class="l2" d="M6 60 C44 58 70 52 128 46"/></svg></span></span></div><div class="preview-cap"><strong>Causel</strong>Build what moves the needle</div></div>
+</div>
+
+<script>
+(function () {
+  "use strict";
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var root = document.documentElement;
+
+  /* ---- theme toggle ---- */
+  var toggle = document.getElementById("themeToggle");
+  var icon = document.getElementById("themeIcon");
+  var moon = '<path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/>';
+  var sun = '<circle cx="12" cy="12" r="4.2"/><path d="M12 2v2M12 20v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M2 12h2M20 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/>';
+  function currentDark() {
+    var t = root.getAttribute("data-theme");
+    if (t) return t === "dark";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+  function syncIcon() { icon.innerHTML = currentDark() ? sun : moon; }
+  syncIcon();
+  toggle.addEventListener("click", function () {
+    root.setAttribute("data-theme", currentDark() ? "light" : "dark");
+    syncIcon();
+  });
+
+  /* ---- hero load sequence ---- */
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () { document.body.classList.add("ready"); });
+  });
+
+  /* ---- cycling phrase ---- */
+  var phrases = ["bothered to fix.", "noticed was broken.", "had the patience for.", "thought was worth it."];
+  var cycler = document.getElementById("cycler");
+  // seed widths: render all, keep one visible
+  var nodes = phrases.map(function (p, i) {
+    var s = document.createElement("span");
+    s.className = "word" + (i === 0 ? " in" : "");
+    s.textContent = p;
+    cycler.appendChild(s);
+    return s;
+  });
+  if (!reduce) {
+    var idx = 0;
+    setInterval(function () {
+      var cur = nodes[idx];
+      var nextIdx = (idx + 1) % nodes.length;
+      var nxt = nodes[nextIdx];
+      cur.classList.remove("in"); cur.classList.add("out");
+      nxt.classList.remove("out"); nxt.classList.add("in");
+      idx = nextIdx;
+    }, 2600);
+  }
+
+  /* ---- sticky bar border ---- */
+  var bar = document.getElementById("bar");
+  var onScroll = function () { bar.classList.toggle("scrolled", window.scrollY > 10); };
+  onScroll();
+  window.addEventListener("scroll", onScroll, { passive: true });
+
+  /* ---- scroll reveal ---- */
+  if ("IntersectionObserver" in window && !reduce) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    document.querySelectorAll(".reveal").forEach(function (el, i) {
+      el.style.transitionDelay = (Math.min(i % 4, 3) * 0.06) + "s";
+      io.observe(el);
+    });
+  } else {
+    document.querySelectorAll(".reveal").forEach(function (el) { el.classList.add("in"); });
+  }
+
+  /* ---- ledger count-up ---- */
+  function runCount(dd) {
+    var target = parseInt(dd.getAttribute("data-count"), 10);
+    var small = dd.querySelector("small");
+    var smHTML = small ? small.outerHTML : "";
+    if (reduce) { dd.firstChild.textContent = target + " "; return; }
+    var start = null, dur = 1100;
+    function step(ts) {
+      if (!start) start = ts;
+      var p = Math.min((ts - start) / dur, 1);
+      var val = Math.round((1 - Math.pow(1 - p, 3)) * target);
+      dd.innerHTML = val + " " + smHTML;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  if ("IntersectionObserver" in window) {
+    var lio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { runCount(e.target); lio.unobserve(e.target); }
+      });
+    }, { threshold: 0.6 });
+    document.querySelectorAll(".ledger dd[data-count]").forEach(function (dd) { lio.observe(dd); });
+  } else {
+    document.querySelectorAll(".ledger dd[data-count]").forEach(runCount);
+  }
+
+  /* ---- index hover previews (desktop) ---- */
+  var desktop = window.matchMedia("(hover: hover) and (min-width: 820px)");
+  var rows = document.getElementById("rows");
+  var preview = document.getElementById("preview");
+  var stages = {};
+  document.querySelectorAll(".preview-stage").forEach(function (s) { stages[s.getAttribute("data-for")] = s; });
+  var activeRow = null, rafId = null, tx = 0, ty = 0, cx = 0, cy = 0;
+
+  function follow() {
+    cx += (tx - cx) * 0.18; cy += (ty - cy) * 0.18;
+    preview.style.left = cx + "px";
+    preview.style.top = cy + "px";
+    if (Math.abs(tx - cx) > 0.5 || Math.abs(ty - cy) > 0.5) { rafId = requestAnimationFrame(follow); }
+    else { rafId = null; }
+  }
+  function moveTo(x, y) {
+    var pad = 24;
+    var w = 260, h = 300;
+    var px = x + 28, py = y - h / 2;
+    if (px + w > window.innerWidth - pad) px = x - w - 28;
+    if (py < pad) py = pad;
+    if (py + h > window.innerHeight - pad) py = window.innerHeight - pad - h;
+    tx = px; ty = py;
+    if (!rafId) { cx = tx; cy = ty; rafId = requestAnimationFrame(follow); }
+  }
+
+  if (desktop.matches) {
+    preview.style.display = "block";
+    rows.querySelectorAll(".row").forEach(function (row) {
+      var key = row.getAttribute("data-vis");
+      function enter(ev) {
+        activeRow = row;
+        rows.classList.add("has-active");
+        rows.querySelectorAll(".row").forEach(function (r) { r.classList.remove("active"); });
+        row.classList.add("active");
+        Object.keys(stages).forEach(function (k) { stages[k].classList.toggle("on", k === key); });
+        preview.classList.add("show");
+        if (ev.clientX) moveTo(ev.clientX, ev.clientY);
+      }
+      function leave() {
+        row.classList.remove("active");
+      }
+      row.addEventListener("mouseenter", enter);
+      row.addEventListener("mousemove", function (ev) { moveTo(ev.clientX, ev.clientY); });
+      row.addEventListener("focus", function () {
+        var r = row.getBoundingClientRect();
+        activeRow = row; rows.classList.add("has-active");
+        rows.querySelectorAll(".row").forEach(function (x) { x.classList.remove("active"); });
+        row.classList.add("active");
+        Object.keys(stages).forEach(function (k) { stages[k].classList.toggle("on", k === key); });
+        preview.classList.add("show");
+        moveTo(r.right - 40, r.top + r.height / 2);
+      });
+      row.addEventListener("blur", leave);
+    });
+    rows.addEventListener("mouseleave", function () {
+      rows.classList.remove("has-active");
+      rows.querySelectorAll(".row").forEach(function (r) { r.classList.remove("active"); });
+      preview.classList.remove("show");
+    });
+  }
+
+  /* ---- magnetic primary button ---- */
+  if (desktop.matches && !reduce) {
+    document.querySelectorAll(".magnetic").forEach(function (btn) {
+      btn.addEventListener("mousemove", function (e) {
+        var r = btn.getBoundingClientRect();
+        var mx = e.clientX - (r.left + r.width / 2);
+        var my = e.clientY - (r.top + r.height / 2);
+        btn.style.transform = "translate(" + mx * 0.18 + "px," + my * 0.22 + "px)";
+      });
+      btn.addEventListener("mouseleave", function () { btn.style.transform = ""; });
+    });
+  }
+})();
+</script>
 
 </body>
 </html>
